@@ -157,15 +157,3 @@ The API includes health check endpoints:
 
 [MIT License](LICENSE)
 ```
-
-This README includes:
-
-1. **All API endpoints** for both buses and trips
-2. **Testing utilities** with all available modes
-3. **Docker integration** instructions
-4. **Development setup** guide
-5. **Testing scenarios** covering all CRUD operations
-6. **Environment configuration**
-7. **Monitoring** information
-
-The structure follows standard GitHub README best practices and provides clear instructions for both development and production deployment. You can customize the license section and add any additional project-specific details as needed.
