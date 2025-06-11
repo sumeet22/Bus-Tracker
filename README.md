@@ -1,98 +1,159 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+Here's a comprehensive `README.md` file for your project that includes all operations, testing instructions, and Docker integration:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+```markdown
+# Bus Tracking System
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A real-time bus tracking system with driver, passenger, and admin functionalities.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Real-time bus location tracking
+- Trip management
+- Bus fleet management
+- Wheelchair availability tracking
+- Upcoming trip notifications
 
-## Project setup
+## API Endpoints
 
+### Bus Endpoints
+- `GET /buses` - List all buses
+- `GET /buses/:id` - Get bus details
+- `POST /buses` - Create new bus
+- `PUT /buses/:id` - Update bus
+- `DELETE /buses/:id` - Delete bus
+
+### Trip Endpoints
+- `GET /trips` - List all trips
+- `GET /trips/:id` - Get trip details
+- `GET /trips/:id/status` - Get trip status
+- `GET /trips/route/:routeId` - Get trips by route
+- `GET /trips/:routeId/upcoming` - Get upcoming trips
+- `POST /trips` - Create new trip
+- `PUT /trips/:id/progress` - Update trip progress
+- `PUT /trips/:id/wheelchair` - Update wheelchair availability
+
+## Testing Utilities
+
+The project includes a test script (`bus-tracking-test.js`) with multiple modes:
+
+### Modes of Operation
+
+1. **Driver Mode**:
+   ```bash
+   node bus-tracking-test.js driver <tripId>
+   ```
+   - Update to next stop
+   - Mark wheelchair occupied/available
+   - Refresh trip details
+
+2. **Passenger Mode**:
+   ```bash
+   node bus-tracking-test.js passenger <routeId>
+   ```
+   - View upcoming trips
+   - Subscribe to route updates
+
+3. **Search Mode**:
+   ```bash
+   node bus-tracking-test.js search
+   ```
+   - Search routes by destination
+
+4. **Bus CRUD Mode**:
+   ```bash
+   node bus-tracking-test.js bus-crud
+   ```
+   - List all buses
+   - Get bus details
+   - Create new bus
+   - Update bus
+   - Delete bus
+
+5. **Trip CRUD Mode**:
+   ```bash
+   node bus-tracking-test.js trip-crud
+   ```
+   - List all trips
+   - Get trip details
+   - Create new trip
+   - Update trip
+   - Delete trip
+
+## Docker Integration
+
+The project includes Docker support for easy deployment:
+
+### Build the Docker Image
 ```bash
-$ npm install
+docker build -t bus-tracking-system .
 ```
 
-## Compile and run the project
-
+### Run the Container
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker run -p 3000:3000 -d bus-tracking-system
 ```
 
-## Run tests
+### Docker Compose
+A `docker-compose.yml` file is provided for development:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker-compose up --build
 ```
 
-## Deployment
+## Environment Variables
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Create a `.env` file based on `.env.example`:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```
+PORT=3000
+NODE_ENV=development
+# Add other required variables
+```
 
+## Development Setup
+
+1. Install dependencies:
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+2. Start the development server:
+```bash
+npm run start:dev
+```
 
-## Resources
+3. Run tests:
+```bash
+npm test
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## Testing Scenarios
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Bus Operations
+1. Create a new bus
+2. List all buses
+3. Update bus details
+4. Delete a bus
 
-## Support
+### Trip Operations
+1. Create a new trip
+2. List all trips
+3. Update trip progress
+4. Change wheelchair availability
+5. Delete a trip
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Real-time Testing
+1. Start a trip in driver mode
+2. Monitor the trip in passenger mode
+3. Verify real-time updates
 
-## Stay in touch
+## Monitoring
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The API includes health check endpoints:
+- `GET /health` - Basic health check
+- `GET /metrics` - Application metrics (if configured)
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+[MIT License](LICENSE)
+```
